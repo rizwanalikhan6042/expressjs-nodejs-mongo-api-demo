@@ -7,7 +7,7 @@ setTimeout(()=>{
     b=7;
 },2000);
 console.log(a+b);
-How to handle async problem of serial operation by promises
+// How to handle async problem of serial operation by promises
 const waitingData=new Promise((resolve,reject)=>{
     setTimeout(()=>{
         resolve(80);
@@ -18,7 +18,7 @@ waitingData.then((data)=>{
   b=data;
   console.log(a+b);
 });
-For practice I am writing it again
+// For practice I am writing it again
 const serialData=new Promise((resolve,reject)=>{
     setTimeout(() => {
         resolve(78);
