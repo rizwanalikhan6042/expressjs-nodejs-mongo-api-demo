@@ -1,0 +1,55 @@
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/E-comm');
+
+const productSchema = new mongoose.Schema({
+    name: String,
+    modal: String,
+    price: Number
+})
+//If your heading name in schema is different than in heading name in model than it will not update in mango compass
+const main = async () => {
+    const productsModal = mongoose.model('products', productSchema);
+    let data = new productsModal({
+        name: 'm-10',
+        modal: 'nokia',
+        price:28000,
+        category:'luxury'
+
+
+    })
+    // Product category is not printed in mongo compass because it was not the part of product schema If you want to add category in database then you have to add this in product scheme first
+    let result = await data.save();
+    console.log(result);
+}
+// main();
+// Update code start
+const UpdateInDB = async () =>{
+    const Product = mongoose.model('products',productSchema);
+    let data = await Product.updateOne({name:"m-290"}, {$set:{price:0}});
+    console.log(data);
+}
+UpdateInDB()
+
+//Delete code started
+const deleteInDB = async () =>{
+    const productsModal=mongoose.model('products',productSchema);
+    let data = await productsModal.deleteOne({name:"m-290"});
+    console.log(data);
+}
+// deleteInDB()
+
+// Find code started
+// const findInDB = async () =>{
+//     const productsModal=mongoose.model('products',productSchema);
+//     let data = await productsModal.find();
+//     console.log(data);
+// }
+// findInDB()
+
+// You want to find specific value then you have to give that in find method by curly brackets
+const findInDB = async () =>{
+    const productsModal=mongoose.model('products',productSchema);
+    let data = await productsModal.find({modal: 'nokia'});
+    console.log(data);
+}
+findInDB()
