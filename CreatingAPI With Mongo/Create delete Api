@@ -1,0 +1,19 @@
+const express=require('express');
+const dbConnect=require('./mongo1Db');
+const app=express();
+//Take care about ID when you delete, because ID is in object format
+// You have to create mongo db object instance
+// For that you have to import mongo db
+const mongodb=require('mongodb');
+// For creating post API , put API this below statement is necessary
+app.use(express.json());
+
+app.delete("/:id",async (req,resp)=>{
+   
+    let data = await dbConnect();
+    let result = await data.deleteOne({_id: new mongodb.ObjectId(req.params.id)})
+    resp.send(result);
+    console.log(result);
+})
+
+app.listen(3280);
