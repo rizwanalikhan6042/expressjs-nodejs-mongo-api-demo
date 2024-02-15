@@ -1,0 +1,32 @@
+const express=require('express');
+const dbConnect=require('./mongo1Db');
+const app=express();
+// For creating post API , put API this below statement is necessary
+app.use(express.json());
+// app.put('/',async (req,resp)=>{
+//     let data = await dbConnect();
+//     let result = await data.updateOne({name:"Abdul Moid"},
+//     {$set:req.body})
+//     console.log(req.body);
+//     resp.send({result : "updated"});
+// })
+//Dynamically update below
+app.put('/',async (req,resp)=>{
+    let data = await dbConnect();
+    let result = await data.updateOne({name:req.body.name},
+    {$set:req.body})
+    console.log(req.body);
+    resp.send({result : "updated"});
+})
+// by query parameter dynamically update below
+
+app.put('/:name',async (req,resp)=>{
+    let data = await dbConnect();
+    let result = await data.updateOne({name:req.params.name},
+    {$set:req.body})
+    console.log(req.body);
+    resp.send({result : "updated"});
+})
+
+
+app.listen(3280);
