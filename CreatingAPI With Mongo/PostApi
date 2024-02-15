@@ -1,0 +1,12 @@
+const express=require('express');
+const dbConnect=require('./mongo1Db');
+const app=express();
+app.use(express.json());
+//bhai insert method() deprecated ho chuka he aap insertOne() yaa insertMany() use karo
+app.post('/',async (req,resp)=>{
+    let data = await dbConnect();
+    let result = await data.insertOne(req.body);
+   resp.send(result);
+})
+
+app.listen(3280);
