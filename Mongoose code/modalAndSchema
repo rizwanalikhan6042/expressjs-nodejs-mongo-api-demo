@@ -1,0 +1,15 @@
+const mongoose=require('mongoose');
+
+const main = async () =>{
+await mongoose.connect("mongodb://localhost:27017/E-comm");
+const productSchema = new mongoose.Schema({
+    name:String
+    
+})
+// We does not provide price in schema that's why in mongo compass it will not show us that value it will only show us name because it is provided in schema
+const productsModal = mongoose.model("products",productSchema);
+let data = new productsModal ({name:"M-10",price:90});
+let result = await data.save();
+console.log(result);
+}
+main();
