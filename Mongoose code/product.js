@@ -1,3 +1,4 @@
+//This is for model and schema 
 const mongoose=require('mongoose');
 const productSchema = new mongoose.Schema({
     name:String,
